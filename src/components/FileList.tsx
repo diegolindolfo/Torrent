@@ -1,14 +1,14 @@
-import type { TorrentFile } from '../types'
+import type { TorrentFile } from '../lib/api'
 import { fileKind, formatBytes, isStreamable } from '../lib/format'
 
 type Props = {
   files: TorrentFile[]
   selectedPath: string | null
   onSelect: (file: TorrentFile) => void
-  onDownload: (file: TorrentFile) => void
+  downloadUrl: (file: TorrentFile) => string
 }
 
-export function FileList({ files, selectedPath, onSelect, onDownload }: Props) {
+export function FileList({ files, selectedPath, onSelect, downloadUrl }: Props) {
   if (files.length === 0) {
     return (
       <p className="text-sm text-slate-400">
@@ -54,13 +54,13 @@ export function FileList({ files, selectedPath, onSelect, onDownload }: Props) {
                 {selected ? 'Reproduzindo' : 'Reproduzir'}
               </button>
             ) : null}
-            <button
-              type="button"
-              onClick={() => onDownload(f)}
+            <a
+              href={downloadUrl(f)}
+              download={f.name}
               className="rounded-md border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:bg-slate-700"
             >
               Baixar
-            </button>
+            </a>
           </li>
         )
       })}

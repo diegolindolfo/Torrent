@@ -1,0 +1,2 @@
+web: npm run dev
+server: npm --prefix server run dev
