@@ -1,4 +1,4 @@
-import type { TorrentStats } from '../types'
+import type { TorrentStats } from '../lib/api'
 import {
   formatBytes,
   formatEta,
